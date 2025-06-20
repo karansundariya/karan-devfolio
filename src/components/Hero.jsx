@@ -83,6 +83,7 @@ export default function Hero() {
               <img
                 src="/assets/profile.JPG"
                 alt="Karan Sundariya"
+                  loading="lazy"
                 className="absolute inset-0 w-full h-full rounded-full object-cover object-top"
               />
 
