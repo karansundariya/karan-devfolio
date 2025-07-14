@@ -2,16 +2,16 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const projects = [
-  {
-    title: 'CVNirman_AI',
+    {
+    title: 'JobLex',
     description:
-      'AI-powered resume and cover letter builder using Gemini API and Firebase Auth. Helps generate professional documents effortlessly.',
-    image: '/assets/cvnirmaan-ai.png',
-    tech: ['React', 'TailwindCSS', 'Firebase', 'Gemini API'],
-    github: 'https://github.com/karansundariya/CVNirmaan_AI',
-    demo: 'https://cvnirmaan-ai.vercel.app',
+      'JobLex is a mobile-first campus recruitment platform with internal/external jobs, auto-expiry, email and keyword alerts, job sharing, gamified profiles, and easy resume uploads—making hiring seamless and student-first.',
+    image: '/assets/joblex.png',
+    tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB ', 'JWT + bcrypt'],
+    github: 'https://github.com/karansundariya/JobLex',
+    demo: 'https://joblex-vo9q.onrender.com/',
   },
-  {
+    {
     title: 'Saahitya 📚 - The Reading App',
     description:
       'Modern book app built with vanilla JS and Google Books API. Features personalized recommendations and dark mode.',
@@ -21,13 +21,13 @@ const projects = [
     demo: 'https://karansundariya.github.io/Saahitya-Hub',
   },
   {
-    title: 'Karan DSA Profile',
+    title: 'CVNirman_AI',
     description:
-      'Personal webpage to showcase my coding and DSA profiles (LeetCode, GFG, etc.) with a clean and responsive UI.',
-    image: '/assets/karan-dsa-profile.png',
-    tech: ['HTML', 'TailwindCSS', 'JavaScript'],
-    github: 'https://github.com/karansundariya/Karan-DSA-Profile',
-    demo: 'https://karansundariya.github.io/Karan-DSA-Profile/',
+      'AI-powered resume and cover letter builder using Gemini API and Firebase Auth. Helps generate professional documents effortlessly.',
+    image: '/assets/cvnirmaan-ai.png',
+    tech: ['React', 'TailwindCSS', 'Firebase', 'Gemini API'],
+    github: 'https://github.com/karansundariya/CVNirmaan_AI',
+    demo: 'https://cvnirmaan-ai.vercel.app',
   },
   //   {
   //   title: 'Random Password Generator',
