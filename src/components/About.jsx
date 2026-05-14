@@ -32,7 +32,7 @@ export default function About() {
 
           <div className="flex justify-center gap-6">
             <a
-              href = "https://drive.google.com/file/d/1XxtMW1_tlUfAQM-_98xtlKz3vrO_E9CW/view"
+              href = "https://drive.google.com/file/d/1M9-B1RHCtFh_PVOJp5C2IQUeZQVduYzC/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 transition-colors duration-300 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg"
