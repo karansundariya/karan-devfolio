@@ -12,9 +12,36 @@ import {
   FaUsers,
   FaRegHandshake,
   FaBullhorn,
+  FaServer,
 } from 'react-icons/fa';
 
 const experiences = [
+  {
+    title: 'SDE Intern',
+    organization: 'Evernorth Health Services (The Cigna Group)',
+    period: 'Current',
+    description: (
+      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
+        <li>
+          🔧 Automated <span className="font-semibold text-blue-600">OpenSearch backup and recovery</span> across dev/qa/prod environments by building{' '}
+          <span className="font-medium text-purple-600">Python REST utilities</span> to configure snapshot repositories and policies
+        </li>
+        <li>
+          📊 Designed and scheduled <span className="font-semibold text-teal-600">2 snapshots/day</span> for{' '}
+          <span className="font-medium text-indigo-600">30+ indexes (80–120GB)</span> with 30-day retention and automatic deletion, ensuring consistent restore points
+        </li>
+        <li>
+          ⚡ Developed an <span className="font-semibold text-orange-600">on-demand restore script</span> to recover a specific OpenSearch index from{' '}
+          <span className="font-medium text-green-600">Amazon S3 snapshots in 2 minutes</span>
+        </li>
+        <li>
+          ✅ Eliminated <span className="font-semibold text-red-600">manual setup</span> issues after index corruption incidents, replacing hours of recovery steps with a{' '}
+          <span className="font-medium text-cyan-600">repeatable, automated workflow</span>
+        </li>
+      </ul>
+    ),
+    icon: FaServer,
+  },
   {
     title: 'Software Development Engineer Intern',
     organization: 'Neoned71 Tech Solutions',
