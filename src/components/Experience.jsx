@@ -19,7 +19,7 @@ const experiences = [
   {
     title: 'SDE Intern',
     organization: 'Evernorth Health Services (The Cigna Group)',
-    period: 'Current',
+    period: 'July 2025 – Ongoing',
     description: (
       <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
         <li>
