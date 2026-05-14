@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {  FaPhone } from "react-icons/fa";
 
@@ -9,8 +9,6 @@ import emailjs from '@emailjs/browser';
 const service_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const template_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const public_Key = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-
 
 const socialLinks = [
   {
@@ -54,16 +52,17 @@ const socialLinks = [
 export default function Contact() {
   const form = useRef();
 
+  useEffect(() => {
+    if (public_Key) {
+      emailjs.init(public_Key);
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     emailjs
-      .sendForm(
-         service_ID,
-  template_ID,
-  form.current,
-  public_Key
-      )
+      .sendForm(service_ID, template_ID, form.current)
       .then(
         () => {
           alert('✅ Message sent successfully!');
