@@ -2,7 +2,16 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const projects = [
-    {
+  {
+    title: 'Uber Microservices 🚗',
+    description:
+      'Microservices architecture demonstrating real-time ride-sharing at scale. Uses Redis Geospatial to instantly find nearest drivers among 500+ active drivers, Kafka for event-driven communication, and Spring Boot services coordinating the entire ride lifecycle.',
+    image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22400%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23000;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23111;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23grad)%22/%3E%3Ccircle cx=%22300%22 cy=%22200%22 r=%2280%22 fill=%22%23000%22 stroke=%22%23fff%22 stroke-width=%222%22/%3E%3Ctext x=%22300%22 y=%22210%22 font-size=%2224%22 fill=%22%23fff%22 text-anchor=%22middle%22 font-weight=%22bold%22%3EFinding Driver%3C/text%3E%3Ccircle cx=%22150%22 cy=%22100%22 r=%2215%22 fill=%22%23ffb81c%22 opacity=%220.7%22/%3E%3Ccircle cx=%22450%22 cy=%22300%22 r=%2215%22 fill=%22%23ffb81c%22 opacity=%220.7%22/%3E%3Ccircle cx=%22250%22 cy=%22320%22 r=%2215%22 fill=%22%23ffb81c%22 opacity=%220.7%22/%3E%3C/svg%3E',
+    tech: ['Java', 'Spring Boot', 'Redis Geospatial', 'Kafka', 'MySQL', 'Docker'],
+    github: 'https://github.com/karansundariya/Uber-Microservices',
+    demo: '',
+  },
+  {
     title: 'JobLex',
     description:
       'JobLex is a mobile-first campus recruitment platform with internal/external jobs, auto-expiry, email and keyword alerts, job sharing, gamified profiles, and easy resume uploads—making hiring seamless and student-first.',
@@ -10,15 +19,6 @@ const projects = [
     tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB ', 'JWT + bcrypt'],
     github: 'https://github.com/karansundariya/JobLex',
     demo: 'https://joblex-vo9q.onrender.com/',
-  },
-    {
-    title: 'Saahitya 📚 - The Reading App',
-    description:
-      'Modern book app built with vanilla JS and Google Books API. Features personalized recommendations and dark mode.',
-    image: '/assets/saahitya.png',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Google Books API'],
-    github: 'https://github.com/karansundariya/Saahitya-Hub',
-    demo: 'https://karansundariya.github.io/Saahitya-Hub',
   },
   {
     title: 'CVNirman_AI',
