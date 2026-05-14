@@ -21,7 +21,7 @@ export default function About() {
           </h2>
 
           <p className="text-lg leading-relaxed mb-8">
-            I'm a passionate <span className="font-semibold text-indigo-600">Web Developer</span> and Software Engineer
+            I'm a passionate <span className="font-semibold text-indigo-600">Software Engineer and Full Stack Developer </span>
             currently studying in the Final year of the Computer Science and Engineering Department (2022-26), at
             <span className="font-semibold text-pink-500"> Indian Institute of Information Technology (IIIT) Bhagalpur</span>.
             I enjoy building efficient and user-centric web solutions.With a strong grasp
