@@ -1,11 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
-import { SiLeetcode, SiCodechef, SiMedium } from 'react-icons/si';
-import emailjs from '@emailjs/browser';
-
-const service_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const template_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const public_Key = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+import { useState, useRef } from 'react';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
+import { SiLeetcode, SiCodechef, SiMedium, SiGmail } from 'react-icons/si';
 
 const verifiedProfiles = [
   {
@@ -47,46 +42,36 @@ const verifiedProfiles = [
 
 export default function Contact() {
   const formRef = useRef();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formStatus, setFormStatus] = useState(null);
-  const [fallbackData, setFallbackData] = useState(null);
+  const [draftReady, setDraftReady] = useState(false);
+  const [draftLinks, setDraftLinks] = useState({ gmailUrl: '', mailtoUrl: '' });
 
-  useEffect(() => {
-    if (public_Key) {
-      emailjs.init(public_Key);
-    }
-  }, []);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setFormStatus(null);
 
     const formData = new FormData(formRef.current);
-    const name = formData.get('user_name') || '';
+    const name = formData.get('user_name') || 'Colleague / Recruiter';
     const email = formData.get('user_email') || '';
-    const msg = formData.get('message') || '';
+    const message = formData.get('message') || '';
 
-    try {
-      if (!service_ID || !template_ID) {
-        console.warn('EmailJS environment variables missing, simulated locally.');
-        setTimeout(() => {
-          setFormStatus('success');
-          setIsSubmitting(false);
-          formRef.current?.reset();
-        }, 1000);
-        return;
-      }
+    const subject = `Engineering Conversation — ${name}`;
+    const body = `Hi Karan,\n\n${message}\n\n------------------------------\nFrom: ${name}\nEmail: ${email}\nSent via Portfolio (karan-devfolio.vercel.app)`;
 
-      await emailjs.sendForm(service_ID, template_ID, formRef.current, public_Key);
-      setFormStatus('success');
-      formRef.current.reset();
-    } catch (err) {
-      console.error('Email send failed:', err);
-      setFallbackData({ name, email, msg });
-      setFormStatus('error');
-    } finally {
-      setIsSubmitting(false);
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=karansundariya@gmail.com&su=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    const mailtoUrl = `mailto:karansundariya@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    setDraftLinks({ gmailUrl, mailtoUrl });
+    setDraftReady(true);
+
+    // Automatically trigger Gmail compose window
+    const newWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      // If popup was blocked, fallback to mailto
+      window.location.href = mailtoUrl;
     }
   };
 
@@ -198,7 +183,7 @@ export default function Contact() {
                 Send a Direct Message
               </h3>
               <p className="text-sm text-slate-600 mb-8">
-                Your message is sent directly to my personal inbox via EmailJS.
+                Fill in the details below to instantly open a pre-filled draft in your Gmail or preferred email app.
               </p>
 
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
@@ -253,46 +238,32 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
-                {/* Form status alerts */}
-                {formStatus === 'success' && (
-                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono flex items-center gap-2.5">
-                    <FaCheckCircle size={15} className="shrink-0 text-emerald-600" />
-                    <span>Message delivered successfully! I will respond promptly.</span>
-                  </div>
-                )}
-
-                {formStatus === 'error' && (
-                  <div className="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-300 text-slate-800 text-xs font-mono space-y-3">
-                    <div className="flex items-center gap-2 text-amber-900 font-bold">
-                      <FaExclamationCircle size={15} className="shrink-0 text-amber-600" />
-                      <span>Email Service Reconnect Required (Gmail OAuth token expired)</span>
+                {/* Direct draft status alert */}
+                {draftReady && (
+                  <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-300 text-slate-800 text-xs font-mono space-y-3">
+                    <div className="flex items-center gap-2 text-emerald-900 font-bold">
+                      <FaCheckCircle size={16} className="text-emerald-600 shrink-0" />
+                      <span>Draft Opened in Gmail!</span>
                     </div>
-                    <p className="text-slate-600 leading-relaxed font-sans text-xs">
-                      Your draft is saved! You can dispatch this message directly to <strong>karansundariya@gmail.com</strong> in one click:
+                    <p className="text-slate-700 font-sans text-xs leading-relaxed">
+                      Your message has been pre-filled and addressed to <strong>karansundariya@gmail.com</strong>. If your browser blocked the new window, use either button below:
                     </p>
                     <div className="flex flex-wrap gap-2 pt-1 font-mono">
                       <a
-                        href={`mailto:karansundariya@gmail.com?subject=${encodeURIComponent(
-                          `Engineering Inquiry from ${fallbackData?.name || 'Recruiter'}`
-                        )}&body=${encodeURIComponent(
-                          `Sender: ${fallbackData?.name}\nEmail: ${fallbackData?.email}\n\nMessage:\n${fallbackData?.msg}`
-                        )}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-950 text-white hover:bg-slate-800 text-xs font-semibold shadow-xs transition-all"
-                      >
-                        <FaEnvelope size={11} />
-                        <span>Send via Mail Client (Pre-filled)</span>
-                      </a>
-                      <a
-                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=karansundariya@gmail.com&su=${encodeURIComponent(
-                          `Engineering Inquiry from ${fallbackData?.name || 'Recruiter'}`
-                        )}&body=${encodeURIComponent(
-                          `Sender: ${fallbackData?.name} (${fallbackData?.email})\n\nMessage:\n${fallbackData?.msg}`
-                        )}`}
+                        href={draftLinks.gmailUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-950 text-white hover:bg-slate-800 text-xs font-semibold shadow-xs transition-all"
+                      >
+                        <SiGmail size={13} className="text-red-400" />
+                        <span>Open Gmail Web Compose ↗</span>
+                      </a>
+                      <a
+                        href={draftLinks.mailtoUrl}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-300 text-slate-800 hover:bg-slate-50 text-xs font-semibold shadow-xs transition-all"
                       >
-                        <span>Open Gmail Web ↗</span>
+                        <FaEnvelope size={11} className="text-slate-600" />
+                        <span>Open in Default Mail Client</span>
                       </a>
                     </div>
                   </div>
@@ -300,17 +271,11 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-sm font-mono tracking-wide transition-all shadow-xs flex items-center justify-center gap-2 disabled:opacity-50 active:scale-[0.99]"
+                  className="w-full py-3.5 px-6 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-semibold text-sm font-mono tracking-wide transition-all shadow-xs flex items-center justify-center gap-2 active:scale-[0.99]"
                 >
-                  {isSubmitting ? (
-                    <span>Transmitting Message...</span>
-                  ) : (
-                    <>
-                      <span>Transmit Message</span>
-                      <FaPaperPlane size={12} />
-                    </>
-                  )}
+                  <SiGmail size={14} className="text-red-400" />
+                  <span>Draft &amp; Send via Gmail</span>
+                  <FaPaperPlane size={11} className="ml-1" />
                 </button>
               </form>
             </div>
