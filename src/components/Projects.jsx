@@ -1,172 +1,439 @@
-import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaGithub, FaExternalLinkAlt, FaServer, FaCogs, FaDatabase, FaLayerGroup, FaChevronDown, FaChevronUp, FaProjectDiagram } from 'react-icons/fa';
+import { SiRedis, SiApachekafka, SiSpringboot, SiReact, SiMongodb, SiGooglegemini, SiNodedotjs, SiExpress } from 'react-icons/si';
 
 const projects = [
   {
-    title: 'Uber Microservices 🚗',
-    description:
-      'Microservices architecture demonstrating real-time ride-sharing at scale. Uses Redis Geospatial to instantly find nearest drivers among 500+ active drivers, Kafka for event-driven communication, and Spring Boot services coordinating the entire ride lifecycle.',
-    image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22400%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23000;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23111;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23grad)%22/%3E%3Ccircle cx=%22300%22 cy=%22200%22 r=%2280%22 fill=%22%23000%22 stroke=%22%23fff%22 stroke-width=%222%22/%3E%3Ctext x=%22300%22 y=%22210%22 font-size=%2224%22 fill=%22%23fff%22 text-anchor=%22middle%22 font-weight=%22bold%22%3EFinding Driver%3C/text%3E%3Ccircle cx=%22150%22 cy=%22100%22 r=%2215%22 fill=%22%23ffb81c%22 opacity=%220.7%22/%3E%3Ccircle cx=%22450%22 cy=%22300%22 r=%2215%22 fill=%22%23ffb81c%22 opacity=%220.7%22/%3E%3Ccircle cx=%22250%22 cy=%22320%22 r=%2215%22 fill=%22%23ffb81c%22 opacity=%220.7%22/%3E%3C/svg%3E',
-    tech: ['Java', 'Spring Boot', 'Redis Geospatial', 'Kafka', 'MySQL', 'Docker'],
+    id: 'uber-microservices',
+    title: 'Uber Microservices',
+    tagline: 'Event-driven, distributed ride-dispatching backend architecture',
+    category: 'Distributed Systems & Microservices',
+    badge: 'Backend Architecture',
+    imageType: 'architecture',
     github: 'https://github.com/karansundariya/Uber-Microservices',
-    demo: '',
+    demo: null,
+    demoLabel: 'Backend Service (No UI)',
+    summary:
+      'A distributed microservices backend engineered to solve real-time geospatial driver discovery, dynamic ride matching, and asynchronous lifecycle state coordination at scale.',
+    problem:
+      'Coordinating ride requests with hundreds of moving drivers requires ultra-low latency proximity queries, fault-tolerant state transitions, and asynchronous messaging without cascading service failures.',
+    architectureDecisions: [
+      {
+        title: 'Domain Decomposition',
+        desc: 'Split monolith into 3 discrete Spring Boot services: Rider Service, Driver Service, Location Tracking Service, Matching Service, and API Gateway.',
+      },
+      {
+        title: 'Redis Geospatial Indexing',
+        desc: 'Leveraged Redis GEOADD and GEORADIUS commands for sub-millisecond driver proximity lookups instead of heavy relational table scans.',
+      },
+      {
+        title: 'Kafka Event Streaming',
+        desc: 'Used Apache Kafka topics (e.g. ride.requested, driver.assigned) to asynchronously decouple ride booking from notification dispatch and billing pipelines.',
+      },
+      {
+        title: 'Deterministic State Machine',
+        desc: 'Engineered a 5-state ride lifecycle model (REQUESTED → MATCHED → EN_ROUTE → IN_PROGRESS → COMPLETED) preventing race conditions.',
+      },
+    ],
+    challenges: [
+      {
+        challenge: 'Driver Proximity Query Contention',
+        solution: 'Cached driver coordinates into Redis with Geospatial indexing and TTL to offload spatial lookups from persistent storage.',
+      },
+      {
+        challenge: 'Service Decoupling & Asynchrony',
+        solution: 'Replaced synchronous REST calls between order creation and driver matching with Kafka message queues, ensuring the API responds instantly to riders.',
+      },
+    ],
+    tech: [
+      { name: 'Java', icon: FaServer },
+      { name: 'Spring Boot', icon: SiSpringboot },
+      { name: 'Apache Kafka', icon: SiApachekafka },
+      { name: 'Redis Geospatial', icon: SiRedis },
+      { name: 'MySQL', icon: FaDatabase },
+      { name: 'Docker', icon: FaCogs },
+    ],
   },
   {
+    id: 'joblex',
     title: 'JobLex',
-    description:
-      'JobLex is a mobile-first campus recruitment platform with internal/external jobs, auto-expiry, email and keyword alerts, job sharing, gamified profiles, and easy resume uploads—making hiring seamless and student-first.',
-    image: '/assets/joblex.png',
-    tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB ', 'JWT + bcrypt'],
+    tagline: 'Full-stack MERN campus recruitment & hiring workflow platform',
+    category: 'Full-Stack MERN Architecture',
+    badge: 'MERN Stack Application',
+    imageType: 'image',
+    imageSrc: '/assets/joblex.png',
     github: 'https://github.com/karansundariya/JobLex',
     demo: 'https://joblex-vo9q.onrender.com/',
+    demoLabel: 'Live Web App',
+    summary:
+      'A full-stack MERN campus recruitment platform featuring multi-criteria candidate discovery, automated listing lifecycle management, role-based workflows, and resume processing.',
+    problem:
+      'Campus placement and recruitment pipelines are often fragmented across spreadsheets and ad-hoc emails, lacking structured candidate tracking, verified listings, and automated expiry.',
+    architectureDecisions: [
+      {
+        title: 'MERN Stack Core Architecture',
+        desc: 'Structured a cohesive single-page application using React.js, Node.js, Express.js, and MongoDB with clean REST API conventions.',
+      },
+      {
+        title: 'Role-Based Access Control (RBAC)',
+        desc: 'Implemented secure authorization gates separating Students, Recruiters, and Placement Admins using cryptographically signed JWTs and HTTP-only cookies.',
+      },
+      {
+        title: 'Optimized Compound Indexing',
+        desc: 'Designed MongoDB collections with compound indexes on job category, location, salary tier, and active status for high-speed multi-filter queries.',
+      },
+      {
+        title: 'Automated Lifecycle Management',
+        desc: 'Implemented background expiration logic to automatically mark stale openings inactive and clean up deprecated applications.',
+      },
+    ],
+    challenges: [
+      {
+        challenge: 'Multi-parameter Filter Latency',
+        solution: 'Created targeted compound indexes in MongoDB on frequently co-queried fields, reducing query roundtrips across large job collections.',
+      },
+      {
+        challenge: 'Secure Role Escalation Prevention',
+        solution: 'Implemented strict middleware validation inspecting JWT claims on every sensitive mutation route rather than relying on client state.',
+      },
+    ],
+    tech: [
+      { name: 'MongoDB', icon: SiMongodb },
+      { name: 'Express.js', icon: SiExpress },
+      { name: 'React.js', icon: SiReact },
+      { name: 'Node.js', icon: SiNodedotjs },
+      { name: 'JWT & bcrypt', icon: FaLayerGroup },
+      { name: 'Tailwind CSS', icon: FaCogs },
+    ],
   },
   {
-    title: 'CVNirman_AI',
-    description:
-      'AI-powered resume and cover letter builder using Gemini API and Firebase Auth. Helps generate professional documents effortlessly.',
-    image: '/assets/cvnirmaan-ai.png',
-    tech: ['React', 'TailwindCSS', 'Firebase', 'Gemini API'],
+    id: 'cvnirmaan-ai',
+    title: 'CVNirmaan AI',
+    tagline: 'Intelligent resume & cover letter generation platform powered by LLMs',
+    category: 'GenAI & Applied Machine Learning',
+    badge: 'GenAI Engineering',
+    imageType: 'image',
+    imageSrc: '/assets/cvnirmaan-ai.png',
     github: 'https://github.com/karansundariya/CVNirmaan_AI',
     demo: 'https://cvnirmaan-ai.vercel.app',
+    demoLabel: 'Live Web App',
+    summary:
+      'An AI-powered document engineering platform that transforms unstructured candidate profiles into professional, ATS-optimized resumes tailored to target engineering roles.',
+    problem:
+      'Job applicants struggle to tailor resumes for ATS systems and specific job requirements, often spending hours rewriting bullet points manually without structured feedback.',
+    architectureDecisions: [
+      {
+        title: 'Structured LLM Prompt Pipelines',
+        desc: 'Constructed prompt templates using Google Gemini API to enforce strict JSON schemas for experience bullet points, skill categorizations, and executive summaries.',
+      },
+      {
+        title: 'Real-time Interactive Preview',
+        desc: 'Engineered a reactive React state management system that synchronizes AI output with a live PDF/print-ready DOM canvas without UI blocking.',
+      },
+      {
+        title: 'Authentication & Session State',
+        desc: 'Leveraged Firebase Auth and Cloud Firestore to allow secure profile persistence, multi-draft storage, and rapid document iteration.',
+      },
+      {
+        title: 'Client-side PDF Compilation',
+        desc: 'Structured clean semantic HTML print stylesheets for deterministic, high-fidelity PDF exports matching standard recruiter ATS dimensions.',
+      },
+    ],
+    challenges: [
+      {
+        challenge: 'Unpredictable LLM Formats',
+        solution: 'Implemented defensive prompt guardrails and schema validation to enforce standardized JSON output, ensuring zero UI rendering crashes.',
+      },
+      {
+        challenge: 'Latency During Text Generation',
+        solution: 'Utilized progressive loading indicators and segmented prompt calls so sections update incrementally rather than freezing the user interface.',
+      },
+    ],
+    tech: [
+      { name: 'Google Gemini API', icon: SiGooglegemini },
+      { name: 'React.js', icon: SiReact },
+      { name: 'Firebase Auth', icon: FaDatabase },
+      { name: 'Tailwind CSS', icon: FaCogs },
+      { name: 'Prompt Engineering', icon: FaServer },
+    ],
   },
-  //   {
-  //   title: 'Random Password Generator',
-  //   description:
-  //     'A simple React + TailwindCSS app that generates secure passwords with options for length, symbols, and numbers.',
-  //   image: '/projects/password-generator.jpg',
-  //   tech: ['React', 'TailwindCSS', 'Vite'],
-  //   github: 'https://github.com/karansundariya/Random-Password-Generator',
-  //   demo: '',
-  // },
-  // {
-  //   title: 'BST Implementation in C++',
-  //   description:
-  //     'Fully-featured BST program in C++ supporting insert, delete, search, level-order traversal, and conversion from Linked List.',
-  //   image: '/projects/bst-cpp.jpg',
-  //   tech: ['C++'],
-  //   github: 'https://github.com/karansundariya/BST-Implementation',
-  //   demo: '',
-  // },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  show: { opacity: 1, y: 0, scale: 1 },
-};
-
 export default function Projects() {
+  const [expandedProject, setExpandedProject] = useState('uber-microservices');
+
+  const toggleExpand = (id) => {
+    setExpandedProject(expandedProject === id ? null : id);
+  };
+
   return (
-    <section
-      id="projects"
-      className="relative bg-gradient-to-br from-white to-indigo-50 dark:from-gray-900 dark:to-gray-800 py-24"
-    >
-      <div className="container px-6 md:px-12 mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-700 via-cyan-500 to-indigo-700 bg-clip-text text-transparent mb-3">
-            Featured Projects
+    <section id="projects" className="py-24 bg-slate-50/50 relative border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider text-slate-700 bg-white border border-gray-200 mb-3 shadow-xs">
+            <FaProjectDiagram className="text-slate-500 text-[11px]" />
+            <span>Case Studies</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+            Featured Engineering Projects
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
-            Showcasing my technical solutions and creative implementations
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+            In-depth architectural breakdowns showcasing distributed microservices, MERN full-stack development, and Generative AI integrations.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
-        >
-          {projects.map((project) => (
-            <motion.div
-              key={project.title}
-              variants={item}
-              transition={{ type: 'spring', stiffness: 120, damping: 15 }}
-              className="group relative rounded-3xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer transform hover:-translate-y-1 hover:scale-105 transition-all duration-300"
-            >
-              <div className="relative h-52 sm:h-48 md:h-56 overflow-hidden rounded-t-3xl">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </div>
+        {/* Projects List */}
+        <div className="space-y-10">
+          {projects.map((project) => {
+            const isExpanded = expandedProject === project.id;
 
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed min-h-[72px]">
-                  {project.description}
-                </p>
+            return (
+              <article
+                key={project.id}
+                className="bg-white rounded-3xl border border-gray-200/90 hover:border-gray-300 hover:shadow-xl transition-all duration-300 shadow-xs overflow-hidden"
+              >
+                <div className="p-6 sm:p-8 lg:p-10">
+                  
+                  {/* Top Bar: Badge, Category, Links */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-100">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2.5 mb-2">
+                        <span className="px-3 py-0.5 rounded-full text-xs font-mono font-medium bg-slate-900 text-white">
+                          {project.badge}
+                        </span>
+                        <span className="text-xs font-mono text-slate-500">
+                          {project.category}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-slate-600 font-medium mt-1">
+                        {project.tagline}
+                      </p>
+                    </div>
 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="inline-block px-4 py-1 text-sm font-medium text-indigo-700 bg-indigo-100 rounded-full dark:bg-indigo-900 dark:text-indigo-300"
+                    {/* External Action Links */}
+                    <div className="flex items-center gap-3">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-slate-950 text-white hover:bg-slate-800 transition-all shadow-xs"
+                          aria-label={`${project.title} GitHub Source Code`}
+                        >
+                          <FaGithub size={15} />
+                          <span>Code Repository</span>
+                        </a>
+                      )}
+
+                      {project.demo ? (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-gray-300 text-slate-800 hover:bg-slate-50 transition-all shadow-xs"
+                          aria-label={`${project.title} Live Demo`}
+                        >
+                          <FaExternalLinkAlt size={12} />
+                          <span>{project.demoLabel}</span>
+                        </a>
+                      ) : (
+                        <span className="px-3.5 py-1.5 rounded-full text-xs font-mono text-slate-500 bg-slate-100 border border-slate-200">
+                          {project.demoLabel}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Main Grid: Media/Diagram + Executive Summary */}
+                  <div className="grid lg:grid-cols-12 gap-8 my-8 items-center">
+                    
+                    {/* Visual Media Column */}
+                    <div className="lg:col-span-5">
+                      {project.imageType === 'architecture' ? (
+                        <div className="bg-slate-50 rounded-2xl p-5 border border-gray-200">
+                          <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-3 flex items-center justify-between">
+                            <span className="font-semibold text-slate-700">System Topology</span>
+                            <span>Event Mesh</span>
+                          </div>
+
+                          <div className="space-y-2.5 font-mono text-xs">
+                            <div className="p-2.5 rounded-xl bg-white border border-gray-300 text-center text-slate-800 font-semibold shadow-xs">
+                              API Gateway (Spring Cloud)
+                            </div>
+                            <div className="text-center text-slate-400 font-mono text-xs">↓ REST / Dispatch</div>
+                            
+                            <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
+                              <div className="p-2 rounded-lg bg-white border border-gray-200 text-slate-700 shadow-xs">
+                                <div className="font-semibold">Rider Service</div>
+                                <div className="text-[9px] text-slate-400 mt-0.5">Booking API</div>
+                              </div>
+                              <div className="p-2 rounded-lg bg-white border border-gray-200 text-slate-700 shadow-xs">
+                                <div className="font-semibold">Driver Service</div>
+                                <div className="text-[9px] text-slate-400 mt-0.5">Telemetry Feed</div>
+                              </div>
+                            </div>
+
+                            <div className="p-2.5 rounded-xl bg-slate-900 text-white text-center font-semibold text-xs shadow-xs">
+                              ⚡ Kafka Event Bus (Topics: ride-events)
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-2 text-center text-[11px]">
+                              <div className="p-2 rounded-lg bg-white border border-gray-200 text-slate-700 shadow-xs">
+                                <div className="font-semibold text-slate-900">Redis Geospatial</div>
+                                <div className="text-[9px] text-slate-400 mt-0.5">GEOADD / Radius 5km</div>
+                              </div>
+                              <div className="p-2 rounded-lg bg-white border border-gray-200 text-slate-700 shadow-xs">
+                                <div className="font-semibold text-slate-900">Matching Engine</div>
+                                <div className="text-[9px] text-slate-400 mt-0.5">5-State Machine</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-slate-100 aspect-video group shadow-xs">
+                          <img
+                            src={project.imageSrc}
+                            alt={`${project.title} Screenshot`}
+                            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Summary & Problem Column */}
+                    <div className="lg:col-span-7 space-y-4">
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-1">
+                          The Challenge &amp; Context:
+                        </h4>
+                        <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                          {project.problem}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-1">
+                          High-Level Overview:
+                        </h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          {project.summary}
+                        </p>
+                      </div>
+
+                      {/* Tech Stack Chips */}
+                      <div>
+                        <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-2">
+                          Core Technologies Used:
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((t) => {
+                            const TechIcon = t.icon;
+                            return (
+                              <span
+                                key={t.name}
+                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-slate-100 border border-gray-200 text-slate-700"
+                              >
+                                <TechIcon size={12} className="text-slate-600" />
+                                <span>{t.name}</span>
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Expand / Collapse Toggle Button */}
+                  <div className="pt-2">
+                    <button
+                      onClick={() => toggleExpand(project.id)}
+                      className="w-full py-2.5 px-4 rounded-xl bg-slate-50 border border-gray-200 hover:bg-slate-100 text-xs sm:text-sm font-mono text-slate-700 flex items-center justify-center gap-2 transition-colors font-medium"
+                      aria-expanded={isExpanded}
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                      <span>
+                        {isExpanded
+                          ? 'Hide Technical Case Study Details'
+                          : 'Read Full Architecture & Engineering Decisions'}
+                      </span>
+                      {isExpanded ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
+                    </button>
+                  </div>
 
-                <div className="flex items-center gap-5 border-t border-gray-200 dark:border-gray-700 pt-4">
-                  {project.github && (
-                    <motion.a
-                      whileHover={{ scale: 1.2 }}
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} GitHub Repo`}
-                      className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                    >
-                      <FaGithub size={24} />
-                    </motion.a>
+                  {/* Collapsible Deep-Dive Details */}
+                  {isExpanded && (
+                    <div className="pt-8 border-t border-gray-100 mt-6 space-y-8">
+                      {/* Architecture Decisions */}
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+                          <FaServer className="text-slate-700" />
+                          Key Architectural Decisions:
+                        </h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {project.architectureDecisions.map((dec, i) => (
+                            <div
+                              key={i}
+                              className="p-4 rounded-xl bg-slate-50 border border-gray-200"
+                            >
+                              <div className="text-xs font-bold text-slate-900 mb-1 font-mono">
+                                {i + 1}. {dec.title}
+                              </div>
+                              <p className="text-xs text-slate-600 leading-relaxed">
+                                {dec.desc}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Technical Challenges & Mitigations */}
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+                          <FaCogs className="text-slate-700" />
+                          Challenges &amp; Solutions:
+                        </h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {project.challenges.map((item, i) => (
+                            <div
+                              key={i}
+                              className="p-4 rounded-xl bg-slate-50 border border-gray-200 space-y-2"
+                            >
+                              <div>
+                                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
+                                  Challenge:
+                                </span>
+                                <div className="text-xs font-medium text-slate-800 mt-0.5">
+                                  {item.challenge}
+                                </div>
+                              </div>
+                              <div>
+                                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-700 font-semibold">
+                                  Solution Implemented:
+                                </span>
+                                <div className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                                  {item.solution}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
                   )}
-                  {project.demo && (
-                    <motion.a
-                      whileHover={{ scale: 1.2 }}
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} Live Demo`}
-                      className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                    >
-                      <FaExternalLinkAlt size={22} />
-                    </motion.a>
-                  )}
+
                 </div>
-              </div>
+              </article>
+            );
+          })}
+        </div>
 
-              {/* Subtle glow on hover */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-100/40 to-cyan-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Soft animated background orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-28 -right-28 w-96 h-96 bg-indigo-200/40 dark:bg-indigo-900/30 rounded-full blur-3xl animate-pulse animation-delay-2000" />
-        <div className="absolute -bottom-28 -left-28 w-96 h-96 bg-cyan-200/40 dark:bg-cyan-900/30 rounded-full blur-3xl animate-pulse animation-delay-1000" />
       </div>
     </section>
   );

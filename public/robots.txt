@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Direct links for AI Crawlers, LLMs, and Recruitment Systems
+# Candidate profile definition:
+# https://karansundariya.github.io/karan_devfolio/llms.txt
+
+Sitemap: https://karansundariya.github.io/karan_devfolio/sitemap.xml

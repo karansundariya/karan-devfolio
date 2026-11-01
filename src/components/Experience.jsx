@@ -1,400 +1,211 @@
-import { motion } from 'framer-motion';
-import {
-  FaTrophy,
-  FaMedal,
-  FaCode,
-  FaRobot,
-  FaBrain,
-  FaAward,
-  FaBug,
-  FaProjectDiagram,
-  FaLightbulb,
-  FaUsers,
-  FaRegHandshake,
-  FaBullhorn,
-  FaServer,
-} from 'react-icons/fa';
+import { FaServer, FaCode, FaBriefcase, FaCalendarAlt, FaMapMarkerAlt, FaCheck, FaBuilding } from 'react-icons/fa';
 
-const experiences = [
+const professionalExperiences = [
   {
-    title: 'SDE Intern',
-    organization: 'Evernorth Health Services (The Cigna Group)',
-    period: 'July 2025 – Ongoing',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          🔧 Automated <span className="font-semibold text-blue-600">OpenSearch backup and recovery</span> across dev/qa/prod environments by building{' '}
-          <span className="font-medium text-purple-600">Python REST utilities</span> to configure snapshot repositories and policies
-        </li>
-        <li>
-          📊 Designed and scheduled <span className="font-semibold text-teal-600">2 snapshots/day</span> for{' '}
-          <span className="font-medium text-indigo-600">30+ indexes (80–120GB)</span> with 30-day retention and automatic deletion, ensuring consistent restore points
-        </li>
-        <li>
-          ⚡ Developed an <span className="font-semibold text-orange-600">on-demand restore script</span> to recover a specific OpenSearch index from{' '}
-          <span className="font-medium text-green-600">Amazon S3 snapshots in 2 minutes</span>
-        </li>
-        <li>
-          ✅ Eliminated <span className="font-semibold text-red-600">manual setup</span> issues after index corruption incidents, replacing hours of recovery steps with a{' '}
-          <span className="font-medium text-cyan-600">repeatable, automated workflow</span>
-        </li>
-      </ul>
-    ),
+    role: 'Software Engineering Analyst',
+    company: 'Evernorth Health Services',
+    parentCompany: 'The Cigna Group',
+    type: 'Full-time',
+    period: 'July 2026 – Present',
+    location: 'Hyderabad, India',
     icon: FaServer,
+    badgeBg: 'bg-slate-900 text-white',
+    summary:
+      'Architecting production Generative AI microservices, event-driven status tracking pipelines, and high-throughput data workflows for enterprise healthcare systems.',
+    contributions: [
+      'Built and deployed a production GenAI recommendation service utilizing LLMs to automate purge-or-hold compliance decisions on flagged healthcare files, replacing manual review cycles with auditable automated suggestions.',
+      'Designed the backend recommendation pipeline using Java, Spring Boot, MongoDB, LiteLLM, and REST APIs, filtering historical records by hold reason and applying prompt engineering to produce suggested actions, confidence scores, seasonal patterns, and risk flags via event-driven workflows and cron batch jobs.',
+      'Conducted systematic LLM evaluation across 5 models on production workloads for response consistency and token usage efficiency, configuring dynamic LiteLLM routing with automatic backup model fallbacks alongside unit, integration, and end-to-end test suites.',
+      'Replaced static alert emails with context-rich decision emails and an interactive analyst dashboard (MERN) to review, accept, or override AI suggestions, persisting decision rationales for compliance auditability.',
+      'Mapped 24 discrete file-processing stages and broadcast them as real-time Kafka status events into MongoDB, powering live file tracking that surfaces files nearing SLA deadlines first, integrated with OpenTelemetry distributed tracing (trace & span IDs) across microservices.',
+    ],
+    techStack: [
+      'Java',
+      'Spring Boot',
+      'LiteLLM',
+      'GenAI',
+      'Apache Kafka',
+      'MongoDB',
+      'Distributed Tracing',
+      'REST APIs',
+      'Docker',
+    ],
   },
   {
-    title: 'Software Development Engineer Intern',
-    organization: 'Neoned71 Tech Solutions',
-    period: 'Sept 2024 – Nov 2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          🧩 Contributed to{' '}
-          <span className="font-semibold text-blue-600">WriterBoard</span> – a{' '}
-          <span className="font-medium text-indigo-600">node-based storytelling platform</span>
-        </li>
-        <li>
-          💻 Engineered core features using{' '}
-          <span className="font-semibold text-purple-600">C++</span> and{' '}
-          <span className="font-semibold text-teal-600">Qt Framework</span>
-        </li>
-        <li>
-          ⚙️ Enhanced performance of{' '}
-          <span className="font-medium text-yellow-600">QGraphicsScene layouts</span> for smoother rendering
-        </li>
-        <li>
-          🗃️ Optimized data structures with{' '}
-          <span className="font-semibold text-green-700">STL</span> and integrated with a{' '}
-          <span className="font-semibold text-blue-700">centralized database</span>
-        </li>
-        <li>
-          🐞 Resolved <span className="text-red-600 font-bold">30+ bugs</span> and boosted platform stability
-        </li>
-      </ul>
-    ),
-    icon: FaBug,
+    role: 'Software Engineering Intern',
+    company: 'Evernorth Health Services',
+    parentCompany: 'The Cigna Group',
+    type: 'Internship',
+    period: 'July 2025 – June 2026',
+    location: 'Hyderabad, India',
+    icon: FaBriefcase,
+    badgeBg: 'bg-slate-100 text-slate-800 border border-slate-300',
+    summary:
+      'Engineered asynchronous cloud ingestion pipelines, automated batch routing with distributed locking, and resilient disaster recovery mechanisms.',
+    contributions: [
+      'Reduced file-processing latency by migrating legacy mainframe batch flows to an asynchronous cloud pipeline on AWS utilizing Amazon S3, AWS Lambda, Amazon SQS, and Apache Kafka.',
+      'Automated detection and routing of unmatched medical-file cases with a scheduled Spring Boot batch service; implemented idempotent processing and ShedLock distributed locking to guarantee zero duplicate alerts across multi-node instances.',
+      'Engineered automated disaster recovery pipelines with Python REST utilities and Amazon S3-based snapshot management for distributed OpenSearch index restoration, replacing error-prone manual steps with a repeatable automated workflow.',
+      'Implemented blue-green AWS Lambda deployments and automated Artifactory-to-S3 artifact publishing pipelines using Terraform and infrastructure-as-code best practices.',
+    ],
+    techStack: [
+      'AWS (S3, Lambda, SQS)',
+      'Spring Boot',
+      'Apache Kafka',
+      'ShedLock',
+      'Idempotent Processing',
+      'Python',
+      'OpenSearch',
+      'Terraform',
+    ],
   },
   {
-    title: 'LeetCode & GeeksforGeeks',
-    organization: 'DSA Practice',
-    period: 'Ongoing',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          🧠 Solved <span className="font-semibold text-orange-600">500+ problems</span> on{' '}
-          <a
-            href="https://leetcode.com/u/karan__777/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-orange-500 hover:underline hover:text-orange-600 transition duration-200"
-          >
-            LeetCode
-          </a>{' '}
-          – <span className="text-orange-700 font-medium">Knight (Top 5% Worldwide)</span>, Max Rating: 1851
-        </li>
-        <li>
-          🟢 Solved <span className="font-semibold text-green-600">200+ questions</span> on{' '}
-          <a
-            href="https://www.geeksforgeeks.org/user/karan__777/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-600 hover:underline hover:text-green-700 transition duration-200"
-          >
-            GeeksforGeeks
-          </a>{' '}
-          – <span className="font-medium">3★ Coder</span>
-        </li>
-        <li>
-          ⚙️ Built a solid foundation in{' '}
-          <span className="font-semibold text-purple-600">Data Structures & Algorithms</span> through daily practice
-        </li>
-      </ul>
-    ),
+    role: 'C++ Developer Intern',
+    company: 'Neoned71 Tech Solutions',
+    parentCompany: null,
+    type: 'Internship',
+    period: 'September 2024 – November 2024',
+    location: 'Remote',
     icon: FaCode,
-  },
-  {
-    title: 'Flipkart GRiD 6.0 (2024)',
-    organization: 'Software Development Track',
-    period: '2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          <span className="text-green-600 font-bold">Top 1.65%</span> (8,000 / 484,308 participants)
-        </li>
-         <li>
-          Solved <span className="font-semibold text-blue-600">complex algorithmic challenges</span> showcasing strong problem solving skills
-        </li>
-      </ul>
-    ),
-    icon: FaTrophy,
-  },
-  {
-    title: 'HP Power Lab Challenge',
-    organization: 'Quarterfinalist',
-    period: '2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          <span className="text-green-600 font-bold">Top 0.1%</span> (180 / 129,288 participants)
-        </li>
-      <li>
-  Utilized my skills to <span className="font-semibold text-purple-600">develop a platform solution</span> that addresses key business problems
-</li>
-
-        
-      </ul>
-    ),
-    icon: FaBrain,
-  },
-  {
-    title: 'Tata Imagination Challenge 2024',
-    organization: 'National Semi-Finalist',
-    period: '2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          <span className="text-green-600 font-bold">Top 0.1%</span> (7,118 / 312,540 participants)
-        </li>
-        
-     <li>
-  Applied <span className="font-medium text-indigo-600">critical thinking and problem-solving skills</span> to thoroughly analyze various business challenges and identify potential opportunities for improvement
-</li>
-<li>
-  Prepared, presented, and formally submitted <span className="font-semibold text-teal-600">detailed business plans and innovative ideas</span> for evaluation and feedback by mentors and industry experts
-</li>
-
-      </ul>
-    ),
-    icon: FaLightbulb,
-  },
-  {
-    title: 'Internal Smart India Hackathon',
-    organization: '4th Place – IIIT Bhagalpur',
-    period: '2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          Built <span className="text-cyan-500 font-semibold">museum ticketing platform</span> with expolring, and search features
-        </li>
-        <li>
-          Designed <span className="font-medium text-green-600">intuitive UI/UX</span> for streamlined visitor experience
-        </li>
-      </ul>
-    ),
-    icon: FaRobot,
-  },
-  {
-    title: 'EY Techathon 5.0 (2024)',
-    organization: 'SkillUp AI Project',
-    period: '2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          Ranked <span className="text-green-600 font-bold">Top 1,749</span> out of 1.5L+ participants
-        </li>
-        <li>
-          Built an AI-driven <span className="text-orange-500 font-semibold">personalized learning assistant</span> using GenAI frameworks
-        </li>
-      </ul>
-    ),
-    icon: FaBrain,
-  },
-  {
-    title: 'CodeKaze by Naukri 2024',
-    organization: 'Competitive Coding',
-    period: '2024',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          Secured <span className="text-green-600 font-bold">AIR 920</span> out of 1L+ (Top 0.92%)
-        </li>
-        <li>
-          Demonstrated <span className="font-medium text-blue-600">fast</span> and <span className="font-medium text-purple-600">optimized</span> problem-solving skills
-        </li>
-        <li>
-          Applied advanced <span className="font-semibold text-teal-600">DSA concepts</span> to solve complex algorithmic challenges
-        </li>
-        <li>
-          Optimized <span className="font-medium text-orange-500">time and space complexity</span> under strict competition constraints
-        </li>
-      </ul>
-    ),
-    icon: FaCode,
-  },
-  {
-    title: 'Lead - ECell',
-    organization: 'E-Cell, IIIT Bhagalpur',
-    period: 'Jun 2023 – Nov 2023',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          Contributed to two <span className="font-medium text-green-600">impactful projects</span>: a one-stop solution for farmers and a college-based e-commerce platform
-        </li>
-        <li>
-          Collaborated with team members to <span className="font-medium text-blue-600">brainstorm</span> and refine innovative business ideas
-        </li>
-        <li>
-          Enhanced <span className="font-medium text-purple-600">pitching skills</span> via presentations and discussions promoting entrepreneurial initiatives
-        </li>
-        <li>
-          Fostered <span className="font-medium text-orange-500">creativity</span> and <span className="font-medium text-teal-600">teamwork</span> driving successful project execution
-        </li>
-      </ul>
-    ),
-    icon: FaUsers,
-  },
-  {
-    title: 'Team Member',
-    organization: 'EBSB BOARD, IIIT Bhagalpur',
-    period: 'Feb 2023 – Aug 2023',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          Engaged in <span className="font-medium text-cyan-500">community outreach</span> promoting cultural awareness and development
-        </li>
-        <li>
-          Organized <span className="font-medium text-indigo-600">events</span> to celebrate cross-cultural communication and understanding
-        </li>
-        <li>
-          Participated in <span className="font-medium text-green-600">team-building activities</span> enhancing collaborative efforts
-        </li>
-        <li>
-          Planned <span className="font-medium text-purple-600">programs</span> facilitating intercultural dialogue and inclusivity among students
-        </li>
-      </ul>
-    ),
-    icon: FaRegHandshake,
-  },
-  {
-    title: 'Circulation Team Lead',
-    organization: 'Enyugma, IIIT Bhagalpur',
-    period: 'Nov 2022 – Dec 2022',
-    description: (
-      <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300">
-        <li>
-          Enhanced event engagement via <span className="font-medium text-blue-600">effective social media strategies</span>
-        </li>
-        <li>
-          Fostered <span className="font-medium text-purple-600">cross-functional collaboration</span> ensuring seamless promotional processes
-        </li>
-        <li>
-          Maximized <span className="font-medium text-green-600">participation</span> through strategic communication
-        </li>
-        <li>
-          Coordinated with <span className="font-medium text-orange-500">25+ team members</span> to drive college-wide event awareness
-        </li>
-        <li>
-          Achieved <span className="font-medium text-teal-600">30% increase</span> in event attendance over previous year
-        </li>
-      </ul>
-    ),
-    icon: FaBullhorn,
+    badgeBg: 'bg-slate-100 text-slate-800 border border-slate-300',
+    summary:
+      'Engineered core graphical features and optimized layout algorithms for a desktop-based interactive node visualization application.',
+    contributions: [
+      'Contributed to WriterBoard, a node-based interactive storytelling platform, engineering core graphical modules using modern C++ and the Qt Framework.',
+      'Optimized QGraphicsScene layouts, coordinate transforms, and item rendering to maintain fluid UI responsiveness on dense node networks.',
+      'Leveraged C++ Standard Template Library (STL) algorithms and integrated application state with centralized relational database structures.',
+      'Diagnosed and resolved 30+ critical bugs across the event dispatch and layout pipelines, significantly improving application stability and memory footprint.',
+    ],
+    techStack: [
+      'C++',
+      'Qt Framework',
+      'QML',
+      'STL',
+      'OOP',
+      'Relational Databases',
+    ],
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      className="relative bg-gradient-to-br from-slate-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 py-16"
-    >
-      <div className="container px-4 md:px-6 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 max-w-3xl mx-auto"
-        >
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent mb-2">
-            Experiences & Achievements
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300">
-            From learning foundations to solving real-world challenges.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-100px' }}
-          className="relative max-w-4xl mx-auto"
-        >
-          <motion.div
-            initial={{ height: 0 }}
-            whileInView={{ height: '100%' }}
-            transition={{ duration: 1 }}
-            className="absolute left-6 top-0 w-1 bg-gradient-to-b from-cyan-400 to-indigo-600 rounded-full"
-          />
-
-          <div className="space-y-12">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={i}
-                variants={item}
-                transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-                className="relative flex gap-6 items-start group"
-              >
-                <div className="absolute -left-6 top-0 flex flex-col items-center">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white font-semibold shadow-md z-20">
-                    {i + 1}
-                  </div>
-                  {i !== experiences.length - 1 && (
-                    <div className="w-1 flex-1 bg-indigo-300 rounded-full mt-1" />
-                  )}
-                </div>
-
-                <div className="ml-10 mt-1 relative z-10">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 shadow-md border border-cyan-200 dark:border-slate-700"
-                  >
-                    <exp.icon className="text-xl text-indigo-500" />
-                  </motion.div>
-                </div>
-
-                <div className="ml-6 flex-1 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 group-hover:border-cyan-300 transition-all duration-300">
-                  <h3 className="text-xl font-semibold bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent mb-1">
-                    {exp.title}
-                  </h3>
-                  <div className="flex items-center flex-wrap gap-3 mb-3">
-                    <span className="px-3 py-0.5 bg-cyan-100 dark:bg-slate-700 text-cyan-700 dark:text-cyan-400 rounded-full text-sm font-medium">
-                      {exp.organization}
-                    </span>
-                    <span className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                    {exp.description}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+    <section id="experience" className="py-24 bg-slate-50/60 relative border-t border-gray-200">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider text-slate-700 bg-white border border-gray-200 mb-3 shadow-xs">
+            <FaBuilding className="text-slate-500 text-[11px]" />
+            <span>Career Timeline</span>
           </div>
-        </motion.div>
-      </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+            Professional Experience
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+            Real production engineering experience building distributed backend microservices, enterprise GenAI pipelines, and resilient cloud infrastructure.
+          </p>
+        </div>
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-72 h-72 bg-cyan-100/40 dark:bg-cyan-900/30 rounded-full blur-2xl opacity-40 animate-pulse" />
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-indigo-100/40 dark:bg-indigo-900/30 rounded-full blur-2xl opacity-40 animate-pulse" />
+        {/* Timeline Container */}
+        <div className="relative">
+          {/* Vertical Timeline Guide Line */}
+          <div className="hidden sm:block absolute left-8 top-3 bottom-3 w-0.5 bg-gradient-to-b from-slate-300 via-slate-200 to-transparent" />
+
+          <div className="space-y-10">
+            {professionalExperiences.map((exp) => {
+              const Icon = exp.icon;
+              return (
+                <article
+                  key={`${exp.company}-${exp.period}`}
+                  className="relative sm:pl-20"
+                >
+                  {/* Timeline Node Icon (Desktop) */}
+                  <div className="hidden sm:flex absolute left-4 -translate-x-1/2 top-6 w-9 h-9 rounded-xl bg-white border border-gray-300 shadow-xs items-center justify-center z-10 text-slate-800">
+                    <Icon className="text-base" />
+                  </div>
+
+                  {/* Experience Card */}
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/90 hover:border-gray-300 hover:shadow-lg transition-all duration-300 shadow-xs">
+                    
+                    {/* Top Row: Title, Company, Period */}
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-5 border-b border-gray-100">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2.5 mb-1">
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                            {exp.role}
+                          </h3>
+                          <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-mono font-medium ${exp.badgeBg}`}>
+                            {exp.type}
+                          </span>
+                        </div>
+                        <div className="text-base font-semibold text-slate-700">
+                          {exp.company}{' '}
+                          {exp.parentCompany && (
+                            <span className="text-slate-500 font-normal">
+                              ({exp.parentCompany})
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm font-mono text-slate-500">
+                        <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-md border border-gray-200/70">
+                          <FaCalendarAlt className="text-slate-400" />
+                          <span>{exp.period}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-md border border-gray-200/70">
+                          <FaMapMarkerAlt className="text-slate-400" />
+                          <span>{exp.location}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Role Overview */}
+                    <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+                      {exp.summary}
+                    </p>
+
+                    {/* Responsibilities & Achievements */}
+                    <div className="mt-6 space-y-3">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
+                        Production Engineering Highlights:
+                      </div>
+                      <ul className="space-y-2.5 text-sm text-slate-700 leading-relaxed">
+                        {exp.contributions.map((point, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-slate-900 text-[9px] text-white">
+                              <FaCheck />
+                            </span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Tech Stack Pills */}
+                    <div className="mt-6 pt-5 border-t border-gray-100">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-2.5">
+                        Technologies &amp; Architecture:
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {exp.techStack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-xs font-mono rounded-full bg-slate-50 border border-gray-200 text-slate-700 hover:bg-slate-100 transition-colors"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+
       </div>
     </section>
   );

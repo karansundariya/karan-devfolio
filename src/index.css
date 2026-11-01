@@ -1,38 +1,99 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  color-scheme: light;
+}
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
-    font-family: 'Inter', sans-serif;
+html {
+  scroll-behavior: smooth;
+  background-color: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Sleek Light Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: #9A3412;
+}
+
+/* Sarvam AI Style Ambient Warm Sunrise Glow (from Screenshot 1) */
+.sarvam-sunrise-glow {
+  background: radial-gradient(ellipse 75% 40% at 50% 0%, rgba(249, 115, 22, 0.20), rgba(251, 146, 60, 0.10), rgba(254, 215, 170, 0.04), transparent 75%);
+}
+
+.subtle-mesh-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+}
+
+/* Modern AI SaaS Clean Card (Sarvam / Framer style) */
+.clean-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clean-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.07), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* Monospace Code Font */
+.font-mono-code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Pulsing Badge Beacon */
+@keyframes beacon-ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
   }
 }
 
-@layer components {
-  .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
+.animate-beacon {
+  animation: beacon-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  
-  .btn-primary {
-    @apply bg-primary text-white hover:bg-primary/90;
-  }
-  
-  .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
-  }
-  
-  .section {
-    @apply py-16 md:py-20;
-  }
-  
-  .container {
-    @apply max-w-7xl mx-auto px-4;
-  }
-} */
+}

@@ -1,33 +1,140 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth bg-white text-slate-900">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Karan Sundariya Portfolio </title>
-      <!-- Add Tailwind CSS via CDN -->
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Karan Sundariya | Backend &amp; Distributed Systems Software Engineer</title>
+    <meta name="title" content="Karan Sundariya | Backend &amp; Distributed Systems Software Engineer" />
+    <meta name="description" content="Portfolio of Karan Sundariya, Software Engineering Analyst at Evernorth Health Services (The Cigna Group). Specializing in backend engineering, distributed systems, Java, Spring Boot, Kafka, AWS, and enterprise GenAI." />
+    <meta name="keywords" content="Karan Sundariya, Backend Software Engineer, Distributed Systems, Evernorth, The Cigna Group, Java, Spring Boot, Apache Kafka, AWS, Redis, LiteLLM, Microservices, IIIT Bhagalpur, LeetCode Knight" />
+    <meta name="author" content="Karan Sundariya" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href="https://karan-devfolio.vercel.app/" />
+
+    <!-- Machine-readable endpoint for AI screening agents -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM &amp; AI Agent Candidate Profile" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://karan-devfolio.vercel.app/" />
+    <meta property="og:title" content="Karan Sundariya | Backend &amp; Distributed Systems Engineer" />
+    <meta property="og:description" content="Software Engineering Analyst at Evernorth Health Services (The Cigna Group). Specializing in backend engineering, distributed systems, cloud infrastructure, and enterprise GenAI." />
+    <meta property="og:image" content="https://karan-devfolio.vercel.app/assets/profile.JPG" />
+    <meta property="og:site_name" content="Karan Sundariya Portfolio" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://karan-devfolio.vercel.app/" />
+    <meta property="twitter:title" content="Karan Sundariya | Backend &amp; Distributed Systems Engineer" />
+    <meta property="twitter:description" content="Software Engineering Analyst at Evernorth Health Services. Specializing in distributed systems, Java, Spring Boot, Kafka, and enterprise GenAI." />
+    <meta property="twitter:image" content="https://karan-devfolio.vercel.app/assets/profile.JPG" />
+
+    <!-- Structured Data (JSON-LD) for ATS, Recruiters & AI Agents -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://karan-devfolio.vercel.app/#person",
+          "name": "Karan Sundariya",
+          "alternateName": "Karan Choudhary",
+          "jobTitle": "Software Engineering Analyst",
+          "description": "Backend Software Engineer specializing in distributed architectures, microservices, cloud reliability, Apache Kafka, Java, Spring Boot, and Enterprise Generative AI.",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Evernorth Health Services",
+            "parentOrganization": {
+              "@type": "Organization",
+              "name": "The Cigna Group"
+            }
+          },
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Indian Institute of Information Technology, Bhagalpur",
+            "sameAs": "https://www.iiitbh.ac.in/"
+          },
+          "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Backend Software Engineer",
+            "occupationalCategory": "15-1252.00",
+            "skills": "Java, Spring Boot, Apache Kafka, Distributed Systems, Microservices, Redis, AWS Lambda, Amazon SQS, Amazon S3, LiteLLM, OpenSearch, Python, Docker, MySQL, MongoDB"
+          },
+          "url": "https://karan-devfolio.vercel.app/",
+          "image": "https://karan-devfolio.vercel.app/assets/profile.JPG",
+          "email": "mailto:karansundariya@gmail.com",
+          "telephone": "+918058702298",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "addressCountry": "India"
+          },
+          "sameAs": [
+            "https://github.com/karansundariya",
+            "https://linkedin.com/in/karan-sundariya",
+            "https://leetcode.com/u/karan__777/",
+            "https://medium.com/@karansundariya",
+            "https://www.codechef.com/users/karan__777",
+            "https://www.geeksforgeeks.org/user/karan__777/"
+          ],
+          "award": [
+            "LeetCode Knight (Peak Rating: 1897, Top 4.7% Globally)",
+            "1,100+ Solved Algorithmic Challenges",
+            "Coding Club Lead at IIIT Bhagalpur",
+            "Flipkart GRiD 6.0 Top 1.65% Nationwide",
+            "CodeKaze 2024 All India Rank 920"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://karan-devfolio.vercel.app/#website",
+          "url": "https://karan-devfolio.vercel.app/",
+          "name": "Karan Sundariya Portfolio",
+          "author": {
+            "@id": "https://karan-devfolio.vercel.app/#person"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts: Inter & Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configure Tailwind inline -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              primary: "#0ea5e9",
-              secondary: "#0f172a",
+              brand: {
+                orange: '#F97316',
+                amber: '#F59E0B',
+                dark: '#0F172A',
+                slate: '#1E293B',
+                subtle: '#F8FAFC',
+                border: '#E2E8F0',
+              }
             },
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
+              sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+              mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            }
           }
-        },
-        darkMode: 'class',
+        }
       }
     </script>
-    <!-- Add Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body class="bg-white text-[#0F172A] font-sans antialiased selection:bg-orange-500/20 selection:text-orange-900 min-h-screen overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
