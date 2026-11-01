@@ -49,6 +49,7 @@ export default function Contact() {
   const formRef = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(null);
+  const [fallbackData, setFallbackData] = useState(null);
 
   useEffect(() => {
     if (public_Key) {
@@ -60,6 +61,11 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     setFormStatus(null);
+
+    const formData = new FormData(formRef.current);
+    const name = formData.get('user_name') || '';
+    const email = formData.get('user_email') || '';
+    const msg = formData.get('message') || '';
 
     try {
       if (!service_ID || !template_ID) {
@@ -77,6 +83,7 @@ export default function Contact() {
       formRef.current.reset();
     } catch (err) {
       console.error('Email send failed:', err);
+      setFallbackData({ name, email, msg });
       setFormStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -255,9 +262,39 @@ export default function Contact() {
                 )}
 
                 {formStatus === 'error' && (
-                  <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 text-xs font-mono flex items-center gap-2.5">
-                    <FaExclamationCircle size={15} className="shrink-0 text-red-600" />
-                    <span>Transmission error. Please email directly at karansundariya@gmail.com</span>
+                  <div className="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-300 text-slate-800 text-xs font-mono space-y-3">
+                    <div className="flex items-center gap-2 text-amber-900 font-bold">
+                      <FaExclamationCircle size={15} className="shrink-0 text-amber-600" />
+                      <span>Email Service Reconnect Required (Gmail OAuth token expired)</span>
+                    </div>
+                    <p className="text-slate-600 leading-relaxed font-sans text-xs">
+                      Your draft is saved! You can dispatch this message directly to <strong>karansundariya@gmail.com</strong> in one click:
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1 font-mono">
+                      <a
+                        href={`mailto:karansundariya@gmail.com?subject=${encodeURIComponent(
+                          `Engineering Inquiry from ${fallbackData?.name || 'Recruiter'}`
+                        )}&body=${encodeURIComponent(
+                          `Sender: ${fallbackData?.name}\nEmail: ${fallbackData?.email}\n\nMessage:\n${fallbackData?.msg}`
+                        )}`}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-950 text-white hover:bg-slate-800 text-xs font-semibold shadow-xs transition-all"
+                      >
+                        <FaEnvelope size={11} />
+                        <span>Send via Mail Client (Pre-filled)</span>
+                      </a>
+                      <a
+                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=karansundariya@gmail.com&su=${encodeURIComponent(
+                          `Engineering Inquiry from ${fallbackData?.name || 'Recruiter'}`
+                        )}&body=${encodeURIComponent(
+                          `Sender: ${fallbackData?.name} (${fallbackData?.email})\n\nMessage:\n${fallbackData?.msg}`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-300 text-slate-800 hover:bg-slate-50 text-xs font-semibold shadow-xs transition-all"
+                      >
+                        <span>Open Gmail Web ↗</span>
+                      </a>
+                    </div>
                   </div>
                 )}
 
