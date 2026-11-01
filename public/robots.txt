@@ -1,8 +1,32 @@
+# Allow all standard search crawlers and AI sourcing agents
 User-agent: *
 Allow: /
 
-# Direct links for AI Crawlers, LLMs, and Recruitment Systems
-# Candidate profile definition:
-# https://karansundariya.github.io/karan_devfolio/llms.txt
+# Explicitly invite major AI search & recruiting crawlers
+User-agent: GPTBot
+Allow: /
 
-Sitemap: https://karansundariya.github.io/karan_devfolio/sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Point crawlers to your sitemap and LLM context file
+Sitemap: https://karan-devfolio.vercel.app/sitemap.xml
+# LLM Context: https://karan-devfolio.vercel.app/llms.txt
